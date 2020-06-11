@@ -5,6 +5,7 @@ pytest - Python Testing Example
 Code Structure
 ==============
 
+```
 myapp/
     app.py
     mymodule/
@@ -17,3 +18,4 @@ tests/
             __init__.py
             test_additions.py
             test_funcs.py
+```
