@@ -4,7 +4,15 @@ pytest - Python Testing Example
 This is a simple example of how to use pytest to integreate testing in your Python application.
 
 
-##Code Structure
+## Usage
+This example comes with several test files (e.g. test_app.py, test_funcs.py, etc.).
+
+
+![Pytest Output](https://github.com/ptracesecurity/pytest-example/blob/media/pytest_output.png)
+
+
+
+## Code Structure
 
 ```
 myapp/
@@ -24,3 +32,5 @@ tests/
 ## Contact
 
 Author: Gianni Gnesa (gnix) (@GianniGnesa)[https://twitter.com/giannignesa]
+
+For any question about this code, feel free to ask in the (PSEC Facebook Group))[https://www.facebook.com/groups/psec.community].
