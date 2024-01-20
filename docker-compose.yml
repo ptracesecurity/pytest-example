@@ -4,4 +4,4 @@ services:
   test-service:
     build: .
     volumes:
-      - ${WORKSPACE}/test-results:/code/tests/results
+      - ./test-results:/code/tests/results
