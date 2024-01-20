@@ -25,24 +25,24 @@ pipeline {
             steps {
                 script {
                     def containerId = sh(script: 'docker compose ps -q test-service', returnStdout: true).trim()
-                    sh "docker cp ${containerId}:/code/tests/results/. ./test-results"
+                    sh "docker cp ${containerId}:/code/tests/results/. ."
 
-                    junit healthScaleFactor: 5.0, testResults: 'test-results/report.xml'
+                    junit healthScaleFactor: 5.0, testResults: 'report.xml'
 
-                    cobertura coberturaReportFile: 'test-results/coverage.xml'
+                    cobertura coberturaReportFile: 'coverage.xml'
                     publishHTML([
                         allowMissing: false,
                         alwaysLinkToLastBuild: true,
                         keepAll: false,
                         reportDir: '',
-                        reportFiles: 'test-results/report.html',
+                        reportFiles: 'report.html',
                         reportName: 'Test Results',
                     ])
                     publishHTML([
                         allowMissing: false,
                         alwaysLinkToLastBuild: true,
                         keepAll: false,
-                        reportDir: 'test-results/html_coverage',
+                        reportDir: 'html_coverage',
                         reportFiles: 'index.html',
                         reportName: 'Test Coverage',
                     ])
