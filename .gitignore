@@ -3,3 +3,4 @@ __pycache__/
 *.db
 *.log
 *.pyc
+/tests/results

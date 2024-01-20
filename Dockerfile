@@ -2,9 +2,9 @@
 FROM python:3.11
 #
 ## Kopiujemy pliki wymagane do uruchomienia testów
-#COPY . /code
-#
-#WORKDIR /code
+COPY . /code
+
+WORKDIR /code
 
 # Instalujemy wymagane pakiety
 RUN pip install --no-cache-dir -r requirements.txt

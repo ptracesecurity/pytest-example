@@ -26,7 +26,8 @@ pipeline {
 
     post {
         always {
-            deleteDir()
+            echo "always dir delete but not now"
+            //             deleteDir()
         }
         success {
             echo 'Testy zakończone sukcesem!'
