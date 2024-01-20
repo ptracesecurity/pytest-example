@@ -4,6 +4,4 @@ services:
   test-service:
     build: .
     volumes:
-      - type: bind
-        source: ./tests/
-        target: /code/tests/
+      - ./tests/:/code/tests/
