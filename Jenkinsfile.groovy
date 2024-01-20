@@ -26,8 +26,28 @@ pipeline {
                 script {
                     def containerId = sh(script: 'docker compose ps -q test-service', returnStdout: true).trim()
                     sh "docker cp ${containerId}:/code/tests/results/. ./test-results"
-                    echo 'Sprzątanie po testach'
-                    sh 'docker compose down'
+
+                    junit healthScaleFactor: 5.0, testResults: 'test-results/report.xml'
+
+                    cobertura coberturaReportFile: 'test-results/coverage.xml'
+                    publishHTML([
+                        allowMissing: false,
+                        alwaysLinkToLastBuild: true,
+                        keepAll: false,
+                        reportDir: '',
+                        reportFiles: 'test-results/report.html',
+                        reportName: 'Test Results',
+                    ])
+                    publishHTML([
+                        allowMissing: false,
+                        alwaysLinkToLastBuild: true,
+                        keepAll: false,
+                        reportDir: 'test-results/html_coverage',
+                        reportFiles: 'index.html',
+                        reportName: 'Test Coverage',
+                    ])
+                        echo 'Sprzątanie po testach'
+
                 }
             }
         }
@@ -36,6 +56,7 @@ pipeline {
     post {
         always {
             echo "always dir delete but not now"
+            sh 'docker-compose down'
             //             deleteDir()
         }
         success {
