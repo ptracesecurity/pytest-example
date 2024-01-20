@@ -33,13 +33,12 @@ pipeline {
                         keepProperties: true,
                         skipPublishingChecks: true
 
+                    sh 'cp coverage.xml myapp/'
                     recordCoverage skipPublishingChecks: true,
                         tools: [[
                             parser: 'COBERTURA',
                             pattern: 'myapp/coverage.xml'
                         ]]
-
-//                     sh 'cp coverage.xml myapp/'
 //
 //                     cobertura autoUpdateHealth: false,
 //                         autoUpdateStability: false,
