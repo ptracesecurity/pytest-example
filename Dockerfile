@@ -10,4 +10,4 @@ WORKDIR /code
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Uruchamiamy pytest
-CMD pytest; tail -f /dev/null
+CMD pytest
