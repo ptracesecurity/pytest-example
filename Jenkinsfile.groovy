@@ -4,13 +4,19 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo "Zakładam, że krok budowania nie jest potrzebny lub został już skonfigurowany."
+                sh '''
+                    python3 -m venv venv
+                    venv/bin/pip install -r requirements.txt
+                '''
             }
         }
 
         stage('Test') {
             steps {
-                sh 'pytest'
+                sh """
+                    source venv/bin/activate
+                    pytest
+                """
             }
         }
 
