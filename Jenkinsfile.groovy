@@ -34,7 +34,7 @@ pipeline {
                         autoUpdateStability: false,
                         coberturaReportFile: 'myapp/coverage.xml',
                         conditionalCoverageTargets: '70, 0, 0',
-                        enableNewApi: true,
+                        enableNewApi: false,
                         failUnhealthy: false,
                         failUnstable: false,
                         lineCoverageTargets: '80, 0, 0',
