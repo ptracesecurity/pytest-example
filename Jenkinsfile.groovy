@@ -15,6 +15,7 @@ pipeline {
             steps {
                 echo "After tests"
                 sh 'ls'
+                sh 'pwd'
             }
         }
 
