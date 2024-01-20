@@ -23,6 +23,8 @@ pipeline {
 
         stage('Cleanup') {
             steps {
+                def containerId = sh(script: 'docker-compose ps -q test-service', returnStdout: true).trim()
+                sh "docker cp ${containerId}:/code/tests/results ./test-results"
                 echo 'Sprzątanie po testach'
             }
         }
