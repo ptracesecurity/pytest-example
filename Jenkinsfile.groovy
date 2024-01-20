@@ -5,9 +5,10 @@ pipeline {
         stage('Build') {
             steps {
                 ansiColor('xterm') {
-                    sh "mkdir -p ./test-results"
-                    sh 'docker compose build'
-                    sh 'docker compose up'
+                    sh 'ls'
+                    sh 'pwd'
+                    echo "---------------------------------"
+                    sh 'docker compose up --build'
                 }
             }
         }
