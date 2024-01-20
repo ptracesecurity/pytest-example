@@ -56,7 +56,7 @@ pipeline {
     post {
         always {
             echo "always dir delete but not now"
-            sh 'docker-compose down'
+            sh 'docker compose down'
             //             deleteDir()
         }
         success {
