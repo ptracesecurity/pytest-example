@@ -4,4 +4,4 @@ services:
   test-service:
     build: .
     volumes:
-      - ./tests/:/code/tests/
+      - ./test-results:/code/tests/results
