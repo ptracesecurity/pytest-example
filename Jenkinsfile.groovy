@@ -8,7 +8,7 @@ pipeline {
                     sh 'ls'
                     sh 'pwd'
                     echo "---------------------------------"
-                    sh 'docker compose up --build'
+                    sh 'docker compose up --build -d'
                 }
             }
         }
@@ -24,7 +24,7 @@ pipeline {
         stage('Cleanup') {
             steps {
                 script {
-                    def containerId = sh(script: 'docker-compose ps -q test-service', returnStdout: true).trim()
+                    def containerId = sh(script: 'docker compose ps -q test-service', returnStdout: true).trim()
                     sh "docker cp ${containerId}:/code/tests/results ./test-results"
                     echo 'Sprzątanie po testach'
                 }
