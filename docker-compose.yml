@@ -5,5 +5,5 @@ services:
     build: .
     volumes:
       - type: bind
-        source: ./tests/results
-        target: /tests/results
+        source: ./tests/
+        target: /code/tests/
