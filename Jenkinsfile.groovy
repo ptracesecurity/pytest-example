@@ -25,8 +25,9 @@ pipeline {
             steps {
                 script {
                     def containerId = sh(script: 'docker compose ps -q test-service', returnStdout: true).trim()
-                    sh "docker cp ${containerId}:/code/tests/results ./test-results"
+                    sh "docker cp ${containerId}:/code/tests/results/. ./test-results"
                     echo 'Sprzątanie po testach'
+                    sh 'docker compose down'
                 }
             }
         }
