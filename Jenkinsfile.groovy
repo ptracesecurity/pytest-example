@@ -4,8 +4,10 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'docker compose build'
-                sh 'docker compose up'
+                ansiColor('xterm') {
+                    sh 'docker compose build'
+                    sh 'docker compose up'
+                }
             }
         }
 
@@ -24,7 +26,7 @@ pipeline {
 
     post {
         always {
-            echo 'Proces zakończony'
+            deleteDir()
         }
         success {
             echo 'Testy zakończone sukcesem!'
