@@ -29,7 +29,19 @@ pipeline {
 
                     junit healthScaleFactor: 5.0, testResults: 'report.xml'
 
-                    cobertura coberturaReportFile: 'coverage.xml'
+                    cobertura autoUpdateHealth: false,
+                        autoUpdateStability: false,
+                        coberturaReportFile: 'coverage.xml',
+                        conditionalCoverageTargets: '70, 0, 0',
+                        enableNewApi: true,
+                        failUnhealthy: false,
+                        failUnstable: false,
+                        lineCoverageTargets: '80, 0, 0',
+                        maxNumberOfBuilds: 0,
+                        methodCoverageTargets: '80, 0, 0',
+                        onlyStable: false,
+                        sourceEncoding: 'ASCII',
+                        zoomCoverageChart: false
                     publishHTML([
                         allowMissing: false,
                         alwaysLinkToLastBuild: true,
