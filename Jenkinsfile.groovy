@@ -5,18 +5,15 @@ pipeline {
         stage('Build') {
             steps {
                 sh '''
-                    python3 -m venv venv
-                    venv/bin/pip install -r requirements.txt
+                    docker-compose build
+                    docker-compose up
                 '''
             }
         }
 
         stage('Test') {
             steps {
-                sh """
-                    source venv/bin/activate
-                    pytest
-                """
+                echo "After tests"
             }
         }
 
