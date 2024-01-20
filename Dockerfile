@@ -8,6 +8,6 @@ FROM python:3.11
 
 # Instalujemy wymagane pakiety
 RUN pip install --no-cache-dir -r requirements.txt
-
+RUN ls
 # Uruchamiamy pytest
 CMD pytest --color=yes; tail -f /dev/null
