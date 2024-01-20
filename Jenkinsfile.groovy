@@ -28,10 +28,11 @@ pipeline {
                     sh "docker cp ${containerId}:/code/tests/results/. ."
 
                     junit healthScaleFactor: 5.0, testResults: 'report.xml'
+                    sh 'cp coverage.xml myapp/'
 
                     cobertura autoUpdateHealth: false,
                         autoUpdateStability: false,
-                        coberturaReportFile: 'coverage.xml',
+                        coberturaReportFile: 'myapp/coverage.xml',
                         conditionalCoverageTargets: '70, 0, 0',
                         enableNewApi: true,
                         failUnhealthy: false,
