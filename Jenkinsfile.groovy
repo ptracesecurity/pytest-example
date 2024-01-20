@@ -14,6 +14,7 @@ pipeline {
         stage('Test') {
             steps {
                 echo "After tests"
+                sh 'ls'
             }
         }
 
