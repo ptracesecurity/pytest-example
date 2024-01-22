@@ -12,9 +12,11 @@ pipeline {
 
         stage('Test') {
             steps {
-                def serviceName = "test-service"
-                sh "docker compose exec -T ${serviceName} pytest --color=yes"
-                echo "--------------------------------------------"
+                script {
+                    def serviceName = "test-service"
+                    sh "docker compose exec -T ${serviceName} pytest --color=yes"
+                    echo "--------------------------------------------"
+                }
             }
         }
 
