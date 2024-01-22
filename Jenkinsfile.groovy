@@ -29,7 +29,7 @@ pipeline {
                 script {
                     def containerId = sh(script: 'docker compose ps -q test-service', returnStdout: true).trim()
                     sh "docker cp ${containerId}:/code/tests/results/. ."
-
+                    sh "sed -i 's|<source>.*</source>|<source>.</source>|g' coverage.xml"
                     junit healthScaleFactor: 5.0,
                         testResults: 'report.xml',
                         keepLongStdio: true,
