@@ -30,7 +30,7 @@ pipeline {
 
                     echo "Sending results to Jenkins"
 
-                    junit healthScaleFactor: 5.0,
+                    junit healthScaleFactor: 1.0,
                         testResults: 'report.xml',
                         keepLongStdio: true,
                         keepProperties: true,
