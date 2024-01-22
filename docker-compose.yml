@@ -1,0 +1,7 @@
+version: '3.8'
+
+services:
+  test-service:
+    build: .
+#    volumes:
+#      - ./test-results:/code/tests/results
