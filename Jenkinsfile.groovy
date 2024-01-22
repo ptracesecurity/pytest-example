@@ -36,8 +36,6 @@ pipeline {
                         keepProperties: true,
                         skipPublishingChecks: true
 
-                    sh 'cp coverage.xml myapp/'
-
                     recordCoverage skipPublishingChecks: true,
                         tools: [[
                             parser: 'COBERTURA',
