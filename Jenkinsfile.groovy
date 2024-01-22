@@ -5,9 +5,6 @@ pipeline {
         stage('Build') {
             steps {
                 ansiColor('xterm') {
-                    sh 'ls'
-                    sh 'pwd'
-                    echo "---------------------------------"
                     sh 'docker compose up --build -d'
                 }
             }
@@ -15,9 +12,9 @@ pipeline {
 
         stage('Test') {
             steps {
-                echo "After tests"
-                sh 'ls'
-                sh 'pwd'
+                def serviceName = "test-service"
+                sh "docker compose exec -T ${serviceName} pytest --color=yes"
+                echo "--------------------------------------------"
             }
         }
 
