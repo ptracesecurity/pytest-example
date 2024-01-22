@@ -10,6 +10,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
+                echo "Docker compose up"
                 sh 'docker compose up --build -d'
             }
         }
@@ -18,18 +19,17 @@ pipeline {
             steps {
                 script {
                     def serviceName = "test-service"
-                    sh "docker compose exec -T ${serviceName} pytest --color=yes || exit 0"
-                    echo "--------------------------------------------"
-                }
-            }
-        }
+                    sh "docker compose exec -T ${serviceName} pytest || exit 0"
 
-        stage('Cleanup') {
-            steps {
-                script {
+                    echo "--------------------------------------------"
+                    // Prepare results to read in Jenkins
                     def containerId = sh(script: 'docker compose ps -q test-service', returnStdout: true).trim()
                     sh "docker cp ${containerId}:/code/tests/results/. ."
+                    // Change code source in coverage.xml file - related to local/relative files
                     sh "sed -i 's|<source>.*</source>|<source>myapp</source>|g' coverage.xml"
+
+                    echo "Sending results to Jenkins"
+
                     junit healthScaleFactor: 5.0,
                         testResults: 'report.xml',
                         keepLongStdio: true,
@@ -58,8 +58,14 @@ pipeline {
                         reportFiles: 'index.html',
                         reportName: 'Test Coverage',
                     ])
-                        echo 'Sprzątanie po testach'
+                }
+            }
+        }
 
+        stage('Cleanup') {
+            steps {
+                script {
+                    echo "Nothing to do..."
                 }
             }
         }
@@ -67,8 +73,10 @@ pipeline {
 
     post {
         always {
-            echo "always dir delete but not now"
+            echo "Docker compose down..."
             sh 'docker compose down'
+
+            echo "Delete build dir..."
             deleteDir()
         }
         success {
