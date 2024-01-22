@@ -29,7 +29,7 @@ pipeline {
                 script {
                     def containerId = sh(script: 'docker compose ps -q test-service', returnStdout: true).trim()
                     sh "docker cp ${containerId}:/code/tests/results/. ."
-
+                    sh "sed -i 's|<source>.*</source>|<source>myapp</source>|g' coverage.xml"
                     junit healthScaleFactor: 5.0,
                         testResults: 'report.xml',
                         keepLongStdio: true,
@@ -42,20 +42,6 @@ pipeline {
                             pattern: '**/coverage.xml'
                         ]]
 
-//
-//                     cobertura autoUpdateHealth: false,
-//                         autoUpdateStability: false,
-//                         coberturaReportFile: 'myapp/coverage.xml',
-//                         conditionalCoverageTargets: '70, 0, 0',
-//                         enableNewApi: true,
-//                         failUnhealthy: false,
-//                         failUnstable: false,
-//                         lineCoverageTargets: '80, 0, 0',
-//                         maxNumberOfBuilds: 0,
-//                         methodCoverageTargets: '80, 0, 0',
-//                         onlyStable: false,
-//                         sourceEncoding: 'ASCII',
-//                         zoomCoverageChart: false
                     publishHTML([
                         allowMissing: false,
                         alwaysLinkToLastBuild: true,
@@ -82,8 +68,8 @@ pipeline {
     post {
         always {
             echo "always dir delete but not now"
-//             sh 'docker compose down'
-            //             deleteDir()
+            sh 'docker compose down'
+            deleteDir()
         }
         success {
             echo 'Testy zakończone sukcesem!'
