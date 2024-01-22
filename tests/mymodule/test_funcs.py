@@ -19,3 +19,12 @@ def test_multiply():
 @pytest.mark.difficult_operation
 def test_divide():
     assert divide(56, 8) == 7
+    
+@pytest.mark.skip(reason="no way of currently testing this")
+def test_skip():
+    assert 0
+    
+@xfail
+def test_hello():
+    assert 0
+    
