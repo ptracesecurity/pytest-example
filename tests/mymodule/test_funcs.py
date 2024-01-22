@@ -24,7 +24,7 @@ def test_divide():
 def test_skip():
     assert 0
     
-@xfail
+@pytest.mark.xfail
 def test_hello():
     assert 0
     
