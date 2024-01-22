@@ -1,12 +1,16 @@
 pipeline {
     agent any
 
+    options {
+        ansiColor('xterm')
+        timestamps ()
+    }
+
+
     stages {
         stage('Build') {
             steps {
-                ansiColor('xterm') {
-                    sh 'docker compose up --build -d'
-                }
+                sh 'docker compose up --build -d'
             }
         }
 
